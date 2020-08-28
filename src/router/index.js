@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
+import NotFound from '../views/NotFound.vue'
 import firebase from 'firebase'
 
 Vue.use(VueRouter)
@@ -19,6 +20,11 @@ Vue.use(VueRouter)
     meta: {
       login: true
     }
+  },
+  {
+    path: '/*',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 
