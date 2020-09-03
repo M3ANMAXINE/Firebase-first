@@ -33,13 +33,27 @@ app.get('/beers/:id', async(req,res) => {
 })
 
 //END POINT PARA CREAR CERVEZAS
-app.get('/beers', async(req,res) => {
+app.post('/beers', async(req,res) => {
   const beer = await admin.firestore().collection('beers').add(req.body).then((doc) => {
     return doc.id
   })
   res.send(beer)
-
-  
 })
+
+//END POINT PARA BORRAR CERVEZAS
+app.delete('/beers/:id', async(req,res) => {
+  const beer = await admin.firestore().collection('beers').doc(req.params.id).delete() 
+  res.send(beer)
+    })
+
+
+app.put('/beers/:id', async(req,res) => {
+  const beer = await admin.firestore().collection('beers').doc(req.params.id).update(req.body).then(function (doc) {
+    return doc.id
+   }) 
+  res.send(beer)
+})
+
+
 
 exports.api = functions.https.onRequest(app)
